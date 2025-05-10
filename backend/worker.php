@@ -35,7 +35,7 @@ class TableBahan{
 
     function update($id, $nama, $deskripsi, $harga, $jenis, $foto){
         global $kon;
-        if (empty($deskripsi) || empty($waktu)){
+        if (empty($nama) || empty($deskripsi) || empty($harga) || empty($jenis)) {
             header('Location: /');
             exit();
         }
@@ -50,5 +50,54 @@ class TableBahan{
         return $stmt->execute();
     }
 }
+class TableKeranjang{
+    function create($bahan_id, $porsi){
+        global $kon;
+        $sql = "INSERT INTO keranjang(bahan_id, porsi) VALUES ('$bahan_id', '$porsi')";
+        $kon->exec($sql);
+    }
+    function destroy($d){
+        global $kon;
+        $sql = "DELETE FROM keranjang WHERE id = " . $d;
+        $kon->exec($sql);
+    }
+    function fetchAllBahan(){
+        global $kon;
+        $stmt = $kon->query("SELECT * FROM keranjang ORDER BY id DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function nuke(){
+        global $kon;
+        $kon->exec("DELETE FROM keranjang");
+    }
+    function getBahanById($id) {
+        global $kon;
+        if (!$id) {
+            header('Location: /');
+            exit();
+        } else {
+            $stmt = $kon->prepare("SELECT * FROM keranjang WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+
+    function update($id, $bahan_id, $porsi){
+        global $kon;
+        if (empty($bahan_id) || empty($porsi)){
+            header('Location: /');
+            exit();
+        }
+        
+        $stmt = $kon->prepare("UPDATE keranjang SET bahan_id = :bahan_id, porsi = :porsi WHERE id = :id");
+        $stmt->bindParam(':bahan_id', $bahan_id, PDO::PARAM_INT);
+        $stmt->bindParam(':porsi', $porsi, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+}
 
 $bahan = new TableBahan();
+$keranjang = new TableKeranjang();
