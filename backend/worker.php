@@ -51,7 +51,7 @@ class TableBahan{
     }
 }
 class TableKeranjang{
-    function create($bahan_id, $porsi){
+    function create($bahan_id, $porsi= 1){
         global $kon;
         $sql = "INSERT INTO keranjang(bahan_id, porsi) VALUES ('$bahan_id', '$porsi')";
         $kon->exec($sql);
@@ -61,7 +61,7 @@ class TableKeranjang{
         $sql = "DELETE FROM keranjang WHERE id = " . $d;
         $kon->exec($sql);
     }
-    function fetchAllBahan(){
+    function fetchAllData(){
         global $kon;
         $stmt = $kon->query("SELECT * FROM keranjang ORDER BY id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -70,7 +70,7 @@ class TableKeranjang{
         global $kon;
         $kon->exec("DELETE FROM keranjang");
     }
-    function getBahanById($id) {
+    function getDataById($id) {
         global $kon;
         if (!$id) {
             header('Location: /');
