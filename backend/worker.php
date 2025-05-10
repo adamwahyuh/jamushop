@@ -61,11 +61,25 @@ class TableKeranjang{
         $sql = "DELETE FROM keranjang WHERE id = " . $d;
         $kon->exec($sql);
     }
-    function fetchAllData(){
+    // Relasi dari bahan ke keranjang 
+    function fetchAllData() {
         global $kon;
-        $stmt = $kon->query("SELECT * FROM keranjang ORDER BY id DESC");
+        $stmt = $kon->query("
+            SELECT 
+                k.id AS keranjang_id,
+                k.porsi,
+                b.id AS bahan_id,
+                b.nama,
+                b.harga,
+                b.foto,
+                (k.porsi * b.harga) AS total_harga
+            FROM keranjang k
+            JOIN bahan b ON k.bahan_id = b.id
+            ORDER BY k.id DESC
+        ");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     function nuke(){
         global $kon;
         $kon->exec("DELETE FROM keranjang");
