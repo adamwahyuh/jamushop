@@ -1,0 +1,54 @@
+<?php
+class TableBahan{
+    function create($nama, $deskripsi, $harga, $jenis, $foto){
+        global $kon;
+        $sql = "INSERT INTO bahan(nama, deskripsi, harga, jenis, foto) VALUES ('$nama', '$deskripsi', '$harga', '$jenis', '$foto')";
+        $kon->exec($sql);
+    }
+    function destroy($d){
+        global $kon;
+        $sql = "DELETE FROM bahan WHERE id = " . $d;
+        $kon->exec($sql);
+    }
+    function fetchAllBahan(){
+        global $kon;
+        $stmt = $kon->query("SELECT * FROM bahan ORDER BY id DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function nuke(){
+        global $kon;
+        $kon->exec("DELETE FROM bahan");
+    }
+    function getBahanById($id) {
+        global $kon;
+        if (!$id) {
+            header('Location: /');
+            exit();
+        } else {
+            $stmt = $kon->prepare("SELECT * FROM bahan WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+
+    function update($id, $nama, $deskripsi, $harga, $jenis, $foto){
+        global $kon;
+        if (empty($deskripsi) || empty($waktu)){
+            header('Location: /');
+            exit();
+        }
+        
+        $stmt = $kon->prepare("UPDATE bahan SET nama = :nama, deskripsi = :deskripsi, harga = :harga, jenis = :jenis, foto = :foto WHERE id = :id");
+        $stmt->bindParam(':nama', $nama);
+        $stmt->bindParam(':deskripsi', $deskripsi);
+        $stmt->bindParam(':harga', $harga, PDO::PARAM_INT);
+        $stmt->bindParam(':jenis', $jenis);
+        $stmt->bindParam(':foto', $foto);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+}
+
+$bahan = new TableBahan();
