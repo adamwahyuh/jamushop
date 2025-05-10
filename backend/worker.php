@@ -12,7 +12,7 @@ class TableBahan{
     }
     function fetchAllBahan(){
         global $kon;
-        $stmt = $kon->query("SELECT * FROM bahan ORDER BY id DESC");
+        $stmt = $kon->query("SELECT * FROM bahan ORDER BY id ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     function nuke(){
