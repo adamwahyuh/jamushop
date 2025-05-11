@@ -67,6 +67,24 @@ nav .cart a {
 nav .cart a:hover {
     color: #129990;
 }
+
+.cart {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
 @media (max-width: 768px) {
     nav {
         padding: 12px 50px;

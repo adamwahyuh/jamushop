@@ -2,8 +2,8 @@
 $namaToko = "Mbah Jamu";
 include("backend/koneksi.php");
 
-$totalBahan = $bahan->fetchAllBahan();
-
+$totalBahan = count($bahan->fetchAllBahan());
+$totalDataKeranjang = count($keranjang->fetchAllData());
 $search = $_GET['search'] ?? '';
 if ($search !== ''){
     $listBahan = $bahan->search($search);
@@ -11,19 +11,23 @@ if ($search !== ''){
     $listBahan = $bahan->fetchAllBahan();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-    $tKeranjang = $_GET['tKeranjang'] ?? '';
-    if ($tKeranjang !== false){
-        $keranjang->create($tKeranjang);
-    }else{
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $bahan_id = $_POST['bahan_id'] ?? false;
+    $porsi = $_POST['porsi'] ?? false;
+
+    if(!empty($bahan_id) && !empty($porsi)){
+        $keranjang->create($bahan_id, $porsi);
         header('Location: /');
+    }
+    else{
+        header('Location: ');
     }
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
             
             <div class="cart">
                 <a href=""><i class="bi bi-measuring-cup-fill"></i></a>
+                <?php if($totalDataKeranjang !== 0): ?>
+                    <span class="cart-count"><?= $totalDataKeranjang ?></span>
+                    <?php else:?>
+                <?php endif; ?>
             </div>
         </nav>
     </header>
@@ -64,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
                 <a href="?search=rempah+tambahan">Rempah Tambahan</a>
                 <a href="?search=pemanis">Pemanis</a>
                 <a href="?search=bahan+tambahan">Bahan Tambahan</a>
-                <a href="?search=">Semua (<?= count($totalBahan) ?>)</a>
+                <a href="?search=">Semua (<?= $totalBahan ?>)</a>
                 <hr>
             </div>
         </div>

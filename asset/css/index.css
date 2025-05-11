@@ -6,7 +6,11 @@
 * {
   box-sizing: border-box;
 }
-
+header{
+  position: sticky;
+  z-index: 99;
+  top: 0;
+}
 body, html {
   margin: 0;
   padding: 0;
