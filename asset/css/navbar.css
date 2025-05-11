@@ -1,15 +1,9 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-
-
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 12px 150px;
-    background-color: #f8f4e3;
+    background-color: var(--primary-color);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     gap: 20px;
     flex-wrap: wrap;
@@ -52,7 +46,7 @@ nav .logo h2 {
 }
 
 .search button {
-    background-color: #096B68;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     padding: 10px 18px;
@@ -65,7 +59,7 @@ nav .logo h2 {
 }
 nav .cart a {
     font-size: 1.6rem;
-    color: #2A4759;
+    color: var(--secondary-color);
     transition:0.3s ease;
     flex-shrink: 0;
 

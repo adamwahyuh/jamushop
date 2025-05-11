@@ -1,0 +1,105 @@
+@import url(global.css);
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0ead2;
+    color: #3e3e3e;
+    margin-top: 50px;
+}
+
+footer .social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+    padding: 20px 40px;
+    align-items: center;
+    color: white;
+}
+
+footer .social p {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+footer .social .social-links ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .social .social-links a {
+    font-size: 28px;
+    color: var(--primary-color);
+    transition: transform 0.3s, color 0.3s;
+}
+
+footer .social .social-links a:hover {
+    transform: scale(1.2);
+    color: #388e3c;
+}
+
+footer .yapping {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 40px;
+    background-color: #fffef5;
+    border-top: 1px solid #ccc;
+}
+
+footer .tentang,
+footer .credit {
+    flex: 1 1 30px;
+}
+
+footer .tentang h2,
+footer .credit h2 {
+    font-size: 20px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+footer .tentang p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer .credit ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer .credit ul li {
+    margin-bottom: 8px;
+}
+
+footer .credit ul li a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+footer .credit ul li a:hover {
+    color: #388e3c;
+}
+
+@media (max-width: 768px) {
+    footer .social {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    footer .yapping {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
