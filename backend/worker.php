@@ -105,6 +105,13 @@ class TableKeranjang{
 
         return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
+    function findDataByFId($FId){
+        global $kon;
+        $stmt = $kon->prepare('SELECT * FROM keranjang WHERE bahan_id = :FId');
+        $stmt->bindParam(':FId', $FId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     function update($id, $bahan_id, $porsi){
         global $kon;
@@ -119,6 +126,19 @@ class TableKeranjang{
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public function updatePorsi($id, $porsi){
+        global $kon;
+        
+        if (empty($id) || empty($porsi)) {
+            header('Location: /');
+            exit();
+        }
+        $stmt = $kon->prepare("UPDATE keranjang SET porsi = :porsi WHERE id = :id");
+        $stmt->bindParam(':porsi', $porsi, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
 }
 
 $bahan = new TableBahan();

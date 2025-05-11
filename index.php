@@ -5,24 +5,31 @@ include("backend/koneksi.php");
 $totalBahan = count($bahan->fetchAllBahan());
 $totalDataKeranjang = count($keranjang->fetchAllData());
 $search = $_GET['search'] ?? '';
+
 if ($search !== ''){
     $listBahan = $bahan->search($search);
 }else{
     $listBahan = $bahan->fetchAllBahan();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+//handler untuk postnya -> masukin data ke keranjang 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bahan_id = $_POST['bahan_id'] ?? false;
     $porsi = $_POST['porsi'] ?? false;
-
-    if(!empty($bahan_id) && !empty($porsi)){
-        $keranjang->create($bahan_id, $porsi);
+    if (!empty($bahan_id) && !empty($porsi)) {
+        $cekData = $keranjang->findDataByFId($bahan_id);
+        if ($cekData) {
+            $newPorsi = $cekData['porsi'] + $porsi;
+            $keranjang->updatePorsi($cekData['id'],  $newPorsi);
+        } else {
+            $keranjang->create($bahan_id, $porsi);
+        }
         header('Location: /');
+        exit();
     }
-    else{
-        header('Location: ');
-    }
+
 }
+
 
 ?>
 
