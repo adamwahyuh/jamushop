@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $namaToko = "Jamu Mbah Jawa";
 include("backend/koneksi.php");
 
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $keranjang->create($bahan_id, $porsi);
         }
+        $_SESSION['success'] = "Bahan berhasil Dituangkan!";
         header('Location: /');
         exit();
     }
@@ -52,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="asset/css/card.css">
 </head>
 <body>
+    
     <header>
         <nav>
             <div class="logo">
@@ -67,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             
             <div class="cart">
-                <a href=""><i class="bi bi-measuring-cup-fill"></i></a>
+                <a href=""><i class="bi bi-measuring-cup"></i></a>
                 <?php if($totalDataKeranjang !== 0): ?>
                     <span class="cart-count"><?= $totalDataKeranjang ?></span>
                     <?php else:?>
@@ -75,6 +78,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </nav>
     </header>
+
+    <!-- pesan berhasil tambah -->
+    <?php 
+        if (isset($_SESSION['success'])) {
+            echo '<div class="alert success" id ="succes-msg">'.$_SESSION['success'].'</div>';
+            unset($_SESSION['success']);
+        }
+    ?>
 
     <main>
         <div class="sidebar">
@@ -106,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="hidden" name="bahan_id" value="<?= $b['id'] ?>">
                             <div class="porsi-control">
                                 <button type="button" class="kurang">−</button>
-                                <input type="number" name="porsi" class="porsi-input" value="1" min="1">
+                                <input type="number" name="porsi" class="porsi-input" value="1" min="1" readonly>
                                 <button type="button" class="tambah">+</button>
                             </div>
                             <button type="submit" class="card-button">Tambah Keranjang</button>

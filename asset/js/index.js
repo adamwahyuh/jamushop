@@ -13,3 +13,11 @@ document.querySelectorAll('.keranjang-form').forEach(form => {
             input.value = hasil + 1;
         });
 });
+
+setTimeout(() => {
+const msg = document.getElementById('succes-msg');
+if (msg) {
+    msg.style.opacity = '0';
+    setTimeout(() => msg.remove(), 500); 
+}
+}, 1500); 
