@@ -122,5 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
             </div>
         </div>
     </footer>
+
+    <script src="asset/js/index.js"></script>
 </body>
 </html>
