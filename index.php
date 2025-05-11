@@ -6,29 +6,42 @@ $listBahan = $bahan->fetchAllBahan();
 
 ?>
 
-<?php if(!empty($listBahan)): ?>
-    <h2>Daftar Bahan</h2>
-    <ul>
-        <?php foreach($listBahan as $v): ?>
-            <li>
-                <img src="<?= $v['foto'] ?>" alt="<?= $v['nama'] ?>">
-                <div class="tugas">
-                    <p>bahan : <u><?= htmlspecialchars($v['nama']) ?></u></p>
-                </div>
-                <div class="waktu">
-                    <p>deskripsi : <?= $v['deskripsi'] ?></p>
-                </div>
-                <div class="waktu">
-                    <p>Harga : Rp.<?= $v['harga'] ?></p>
-                </div>
-                <div class="act-button">
-                    <a class="hapus" href="?d=<?= $v['id'] ?>"><i class="bi bi-trash3-fill"></i></a>
-                    <a class="edit" href="u.php?u=<?= $v['id'] ?>"><i class="bi bi-pencil-fill"></i></a>
-                    <a class="info" href="display.php?u=<?= $v['id'] ?>"><i class="bi bi-eye-fill"></i></a>
-                </div>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-<?php else: ?>
-    <p>Belum ada tugas</p>
-<?php endif; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamu Shop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="asset/css/navbar.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="asset/img/ginger-tea.png" alt="Logo" height="50px">
+                <h2>Mbah Jamu</h2>
+            </div>
+            
+            <div class="search-container">
+                <form action="/" method="post" class="search">
+                    <input type="text" name="search" id="search" placeholder="Cari jamu...">
+                    <button type="submit">Cari</button>
+                </form>
+            </div>
+            
+            <div class="cart">
+                <a href=""><i class="bi bi-measuring-cup-fill"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>
