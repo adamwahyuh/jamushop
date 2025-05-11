@@ -4,12 +4,12 @@ document.querySelectorAll('.keranjang-form').forEach(form => {
         const input = form.querySelector('.porsi-input');
 
         min.addEventListener('click', () => {
-            let hasil = parseInt(input.hasil);
-            if (hasil > 1) input.hasil = hasil - 1;
+            let hasil = parseInt(input.value);
+            if (hasil > 1) input.value = hasil - 1;
         });
 
         plus.addEventListener('click', () => {
-            let hasil = parseInt(input.hasil);
-            input.hasil = hasil + 1;
+            let hasil = parseInt(input.value);
+            input.value = hasil + 1;
         });
 });

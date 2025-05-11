@@ -3,6 +3,7 @@ $namaToko = "Mbah Jamu";
 include("backend/koneksi.php");
 
 $totalBahan = $bahan->fetchAllBahan();
+
 $search = $_GET['search'] ?? '';
 if ($search !== ''){
     $listBahan = $bahan->search($search);
@@ -91,8 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
                 </div>
                 <?php endforeach; ?>
             </div>
-        </div>
-
+            <?php else: ?>
+                <p class="not-found">Tidak ada bahan</p>
+        </div>  
             <?php endif; ?>
     </main>
 
