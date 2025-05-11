@@ -2,6 +2,7 @@
 $namaToko = "Mbah Jamu";
 include("backend/koneksi.php");
 
+$totalBahan = $bahan->fetchAllBahan();
 $search = $_GET['search'] ?? '';
 if ($search !== ''){
     $listBahan = $bahan->search($search);
@@ -53,7 +54,7 @@ if ($search !== ''){
                 <a href="?search=rempah+tambahan">Rempah Tambahan</a>
                 <a href="?search=pemanis">Pemanis</a>
                 <a href="?search=bahan+tambahan">Bahan Tambahan</a>
-                <a href="?search=">Semua (<?= count($listBahan) ?>)</a>
+                <a href="?search=">Semua (<?= count($totalBahan) ?>)</a>
                 <hr>
             </div>
         </div>
