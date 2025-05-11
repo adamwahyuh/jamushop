@@ -10,6 +10,15 @@ if ($search !== ''){
     $listBahan = $bahan->fetchAllBahan();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    $tKeranjang = $_GET['tKeranjang'] ?? '';
+    if ($tKeranjang !== false){
+        $keranjang->create($tKeranjang);
+    }else{
+        header('Location: /');
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -64,19 +73,26 @@ if ($search !== ''){
             <div class="card-grid">
                 <?php foreach ($listBahan as $b): ?>
                 <div class="card">
-                    <img src="<?= $b['foto'] ?>" alt="Jamu <?= $b['nama'] ?>" class="card-img">
+                    <img src="<?= $b['foto'] ?>" alt="<?= $b['nama'] ?>" class="card-img">
                     <div class="card-body">
-                    <h3 class="card-title"><?= $b['nama'] ?></h3>
-                    <p class="card-category"><?= $b['jenis'] ?></p>
-                    <p class="card-description"><?= $b['deskripsi'] ?></p>
-                    <a href="?tKeranjang=<?= $b['id'] ?>" class="card-button">Tambah Keranjang</a>
+                        <h3 class="card-title"><?= $b['nama'] ?></h3>
+                        <p class="card-category"><?= $b['jenis'] ?></p>
+                        <p class="card-description"><?= $b['deskripsi'] ?></p>
+                        <form action="" method="post" class="keranjang-form">
+                            <input type="hidden" name="bahan_id" value="<?= $b['id'] ?>">
+                            <div class="porsi-control">
+                                <button type="button" class="kurang">−</button>
+                                <input type="number" name="porsi" class="porsi-input" value="1" min="1">
+                                <button type="button" class="tambah">+</button>
+                            </div>
+                            <button type="submit" class="card-button">Tambah Keranjang</button>
+                        </form>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
-            <?php else: ?>
-                <p class="not-found">Bahan Tidak Ada</p>
-            </div>
+        </div>
+
             <?php endif; ?>
     </main>
 
@@ -86,23 +102,22 @@ if ($search !== ''){
             <div class="social-links">
                 <ul class="link">
                     <li><a target="_blank" href="mailto:adamdesign19@gmail.com"><i class="bi bi-google"></i></a></li>
-                    <li><a href="#"><i class="bi bi-instagram"></i></a></li>
-                    <li><a href="#"><i class="bi bi-github"></i></a></li>
+                    <li><a target="_blank" href="https://instagram.com/adamwahyuh"><i class="bi bi-instagram"></i></a></li>
+                    <li><a target="_blank" href="https://github.com/adamwahyuh"><i class="bi bi-github"></i></a></li>
                 </ul>
             </div>
         </div>
         <div class="yapping">
             <div class="tentang">
                 <h2>Tentang</h2>
-                <p>Website ini dibuat untuk Ulangan Tengah Semester (MIDTEST) Pemrograman Web 1 - Dibuat Oleh Adam Wahyu Hariyadi menggunakan PHP dengan database Sqlite - 
+                <p>Website ini dibuat untuk Ujian Tengah Semester (MIDTEST) Pemrograman Web 1 - Dibuat Oleh Adam Wahyu Hariyadi menggunakan PHP dengan database Sqlite - 
                     <a style="color:purple; font-weight:900;" href="https://utpas.ac.id">UTPAS 23</a></p>
             </div>
             <div class="credit">
                 <h2>Links</h2>
                 <ul>
                     <li><a href="#">Credit</a></li>
-                    <li><a href="#">Keranjang</a></li>
-                    <li><a href="#">about</a></li>
+                    <li><a href="#">About</a></li>
                 </ul>
             </div>
         </div>

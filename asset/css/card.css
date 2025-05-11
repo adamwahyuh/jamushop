@@ -1,6 +1,6 @@
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 24px;
 }
 
@@ -11,12 +11,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.card-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -24,6 +19,11 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
 .card-body {
   padding: 16px;
@@ -37,6 +37,11 @@
   font-weight: bold;
   color: var(--secondary-color);
   margin: 0;
+}
+
+.card-category {
+  color: #555;
+  font-size: 15px;
 }
 
 .card-description {
@@ -64,7 +69,38 @@
   background-color: #388e3c; 
 }
 
-.card-category{
-  color: #555;
-  font-size: 15px;
+.keranjang-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.porsi-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.porsi-control button {
+  padding: 6px 12px;
+  font-size: 18px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.porsi-control button:hover {
+  background-color: #ddd;
+}
+
+.porsi-input {
+  width: 60px;
+  text-align: center;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
