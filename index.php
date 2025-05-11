@@ -2,7 +2,12 @@
 $namaToko = "Mbah Jamu";
 include("backend/koneksi.php");
 
-$listBahan = $bahan->fetchAllBahan();
+$search = $_GET['search'] ?? '';
+if ($search !== ''){
+    $listBahan = $bahan->search($search);
+}else{
+    $listBahan = $bahan->fetchAllBahan();
+}
 
 ?>
 
@@ -28,8 +33,8 @@ $listBahan = $bahan->fetchAllBahan();
             </div>
             
             <div class="search-container">
-                <form action="/" method="post" class="search">
-                    <input type="text" name="search" id="search" placeholder="Cari jamu...">
+                <form action="/" method="get" class="search">
+                    <input type="text" name="search" id="search" placeholder="Cari bahan...">
                     <button type="submit">Cari</button>
                 </form>
             </div>
@@ -41,26 +46,37 @@ $listBahan = $bahan->fetchAllBahan();
     </header>
 
     <main>
-<?php if (!empty($listBahan)): ?>
         <div class="sidebar">
-            
-        </div>
-        <div class="content">
-        <div class="card-grid">
-            <?php foreach ($listBahan as $b): ?>
-            <div class="card">
-                <img src="<?= $b['foto'] ?>" alt="Jamu <?= $b['nama'] ?>" class="card-img">
-                <div class="card-body">
-                <h3 class="card-title"><?= $b['nama'] ?></h3>
-                <p class="card-category"><?= $b['jenis'] ?></p>
-                <p class="card-description"><?= $b['deskripsi'] ?></p>
-                <a href="?tKeranjang=<?= $b['id'] ?>" class="card-button">Tambah Keranjang</a>
-                </div>
+            <div class="category">
+                <h2>Kategori</h2>
+                <a href="?search=bahan+utama">Bahan Utama</a>
+                <a href="?search=rempah+tambahan">Rempah Tambahan</a>
+                <a href="?search=pemanis">Pemanis</a>
+                <a href="?search=bahan+tambahan">Bahan Tambahan</a>
+                <a href="?search=">Semua (<?= count($listBahan) ?>)</a>
+                <hr>
             </div>
-            <?php endforeach; ?>
         </div>
-        </div>
-        <?php endif; ?>
+
+    <?php if (!empty($listBahan)): ?>
+        <div class="content">
+            <div class="card-grid">
+                <?php foreach ($listBahan as $b): ?>
+                <div class="card">
+                    <img src="<?= $b['foto'] ?>" alt="Jamu <?= $b['nama'] ?>" class="card-img">
+                    <div class="card-body">
+                    <h3 class="card-title"><?= $b['nama'] ?></h3>
+                    <p class="card-category"><?= $b['jenis'] ?></p>
+                    <p class="card-description"><?= $b['deskripsi'] ?></p>
+                    <a href="?tKeranjang=<?= $b['id'] ?>" class="card-button">Tambah Keranjang</a>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php else: ?>
+                <p class="not-found">Bahan Tidak Ada</p>
+            </div>
+            <?php endif; ?>
     </main>
 
     <footer>

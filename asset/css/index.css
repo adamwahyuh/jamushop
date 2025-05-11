@@ -23,9 +23,10 @@ main {
   background-color: var(--primary-color);
   padding: 24px;
   position: sticky;
-  top: 0;
 }
-
+.sidebar .category{
+  margin-top: 10px;
+}
 .sidebar h2 {
   font-size: 20px;
   color: var(--secondary-color);
@@ -50,4 +51,9 @@ main {
   flex: 1;
   padding: 32px;
 
+}
+
+.not-found {
+  margin: 50px;
+  font-size: 50px;
 }

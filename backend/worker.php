@@ -51,9 +51,11 @@ class TableBahan{
     }
     function search($search){
         global $kon;
-        $stmt = $kon->prepare('SELECT * FROM bahan WHERE nama = :search OR jenis = :search ORDER BY id ASC');
+        $stmt = $kon->prepare('SELECT * FROM bahan WHERE nama LIKE :search OR jenis LIKE :search ORDER BY id ASC');
+        $search = "%$search%"; 
         $stmt->bindParam(':search', $search);
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 class TableKeranjang{
