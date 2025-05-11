@@ -1,5 +1,5 @@
 <?php 
-$namaToko = "Mbah Jamu";
+$namaToko = "Mbah Jamu Jawa";
 include("backend/koneksi.php");
 
 $totalBahan = count($bahan->fetchAllBahan());
