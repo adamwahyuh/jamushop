@@ -17,6 +17,7 @@ $listBahan = $bahan->fetchAllBahan();
     <link rel="stylesheet" href="asset/css/index.css">
     <link rel="stylesheet" href="asset/css/footer.css">
     <link rel="stylesheet" href="asset/css/global.css">
+    <link rel="stylesheet" href="asset/css/card.css">
 </head>
 <body>
     <header>
@@ -40,7 +41,29 @@ $listBahan = $bahan->fetchAllBahan();
     </header>
 
     <main>
-
+<?php if (!empty($listBahan)): ?>
+        <div class="sidebar">
+            <h2>Kategori</h2>
+            <?php foreach ($listBahan as $k): ?>
+                <a href=""><?= $k['jenis'] ?></a>
+            <?php endforeach; ?>
+        </div>
+        <div class="content">
+        <div class="card-grid">
+            <?php foreach ($listBahan as $b): ?>
+            <div class="card">
+                <img src="<?= $b['foto'] ?>" alt="Jamu <?= $b['nama'] ?>" class="card-img">
+                <div class="card-body">
+                <h3 class="card-title"><?= $b['nama'] ?></h3>
+                <p class="card-category"><?= $b['jenis'] ?></p>
+                <p class="card-description"><?= $b['deskripsi'] ?></p>
+                <a href="?tKeranjang=<?= $b['id'] ?>" class="card-button">Tambah Keranjang</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        </div>
+        <?php endif; ?>
     </main>
 
     <footer>
