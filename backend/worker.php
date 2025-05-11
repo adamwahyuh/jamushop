@@ -49,6 +49,12 @@ class TableBahan{
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    function search($search){
+        global $kon;
+        $stmt = $kon->prepare('SELECT * FROM bahan WHERE nama = :search OR jenis = :search ORDER BY id ASC');
+        $stmt->bindParam(':search', $search);
+        $stmt->execute();
+    }
 }
 class TableKeranjang{
     function create($bahan_id, $porsi= 1){

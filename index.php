@@ -43,10 +43,7 @@ $listBahan = $bahan->fetchAllBahan();
     <main>
 <?php if (!empty($listBahan)): ?>
         <div class="sidebar">
-            <h2>Kategori</h2>
-            <?php foreach ($listBahan as $k): ?>
-                <a href=""><?= $k['jenis'] ?></a>
-            <?php endforeach; ?>
+            
         </div>
         <div class="content">
         <div class="card-grid">
