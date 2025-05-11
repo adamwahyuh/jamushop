@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="search-container">
                 <form action="/" method="get" class="search">
                     <input type="text" name="search" id="search" placeholder="Cari bahan...">
-                    <button type="submit">Cari</button>
+                    <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
             </div>
             
