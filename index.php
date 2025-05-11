@@ -1,5 +1,5 @@
 <?php 
-$namaToko = "Mbah Jamu Jawa";
+$namaToko = "Jamu Mbah Jawa";
 include("backend/koneksi.php");
 
 $totalBahan = count($bahan->fetchAllBahan());
@@ -78,14 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <main>
         <div class="sidebar">
-            <div class="category">
-                <h2>Kategori</h2>
-                <a href="?search=bahan+utama">Bahan Utama <span class="highlight-indicator">(<?= $totalBahanUtama; ?>)</span></a>
-                <a href="?search=rempah+tambahan">Rempah Tambahan <span class="highlight-indicator">(<?= $totalRempahTambahan; ?>)</span></a>
-                <a href="?search=pemanis">Pemanis <span class="highlight-indicator">(<?= $totalPemanis; ?>)</span></a>
-                <a href="?search=bahan+tambahan">Bahan Tambahan <span class="highlight-indicator">(<?= $totalBahanTambahan; ?>)</span></a>
-                <a href="?search=">Semua <span class="highlight-indicator">(<?= $totalBahan ?>)</span></a>
-                <hr>
+            <div class="side-content">
+                <div class="category">
+                    <h2>Kategori</h2>
+                    <a href="?search=bahan+utama">Bahan Utama <span class="highlight-indicator">(<?= $totalBahanUtama; ?>)</span></a>
+                    <a href="?search=rempah+tambahan">Rempah Tambahan <span class="highlight-indicator">(<?= $totalRempahTambahan; ?>)</span></a>
+                    <a href="?search=pemanis">Pemanis <span class="highlight-indicator">(<?= $totalPemanis; ?>)</span></a>
+                    <a href="?search=bahan+tambahan">Bahan Tambahan <span class="highlight-indicator">(<?= $totalBahanTambahan; ?>)</span></a>
+                    <a href="?search=">Semua <span class="highlight-indicator">(<?= $totalBahan ?>)</span></a>
+                    <hr>
+                </div>
             </div>
         </div>
 
@@ -97,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img src="<?= $b['foto'] ?>" alt="<?= $b['nama'] ?>" class="card-img">
                     <div class="card-body">
                         <h3 class="card-title"><?= $b['nama'] ?></h3>
+                        <h3 class="card-price">Rp.<?= $b['harga'] ?></h3>
                         <p class="card-category"><?= $b['jenis'] ?></p>
                         <p class="card-description"><?= $b['deskripsi'] ?></p>
                         <form action="" method="post" class="keranjang-form">
@@ -113,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php endforeach; ?>
             </div>
             <?php else: ?>
-                <p class="not-found">Tidak ada bahan</p>
+                <p class="not-found">Tidak ada bahan... :( </p>
         </div>  
             <?php endif; ?>
     </main>

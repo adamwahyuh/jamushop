@@ -38,6 +38,12 @@
   color: var(--secondary-color);
   margin: 0;
 }
+.card-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #F4631E;
+  margin: 0;
+}
 
 .card-category {
   color: #555;
