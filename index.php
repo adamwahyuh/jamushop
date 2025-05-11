@@ -6,6 +6,11 @@ $totalBahan = count($bahan->fetchAllBahan());
 $totalDataKeranjang = count($keranjang->fetchAllData());
 $search = $_GET['search'] ?? '';
 
+$totalBahanUtama = $bahan->countEachDataCategory('bahan utama');
+$totalRempahTambahan = $bahan->countEachDataCategory('rempah tambahan');
+$totalPemanis = $bahan->countEachDataCategory('pemanis');
+$totalBahanTambahan = $bahan->countEachDataCategory('bahan tambahan');
+
 if ($search !== ''){
     $listBahan = $bahan->search($search);
 }else{
@@ -75,11 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="sidebar">
             <div class="category">
                 <h2>Kategori</h2>
-                <a href="?search=bahan+utama">Bahan Utama</a>
-                <a href="?search=rempah+tambahan">Rempah Tambahan</a>
-                <a href="?search=pemanis">Pemanis</a>
-                <a href="?search=bahan+tambahan">Bahan Tambahan</a>
-                <a href="?search=">Semua (<?= $totalBahan ?>)</a>
+                <a href="?search=bahan+utama">Bahan Utama <span class="highlight-indicator">(<?= $totalBahanUtama; ?>)</span></a>
+                <a href="?search=rempah+tambahan">Rempah Tambahan <span class="highlight-indicator">(<?= $totalRempahTambahan; ?>)</span></a>
+                <a href="?search=pemanis">Pemanis <span class="highlight-indicator">(<?= $totalPemanis; ?>)</span></a>
+                <a href="?search=bahan+tambahan">Bahan Tambahan <span class="highlight-indicator">(<?= $totalBahanTambahan; ?>)</span></a>
+                <a href="?search=">Semua <span class="highlight-indicator">(<?= $totalBahan ?>)</span></a>
                 <hr>
             </div>
         </div>

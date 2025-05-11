@@ -6,6 +6,11 @@
 * {
   box-sizing: border-box;
 }
+.highlight-indicator{
+  color: var(--secondary-color);
+  font-weight: 900;
+}
+
 header{
   position: sticky;
   z-index: 99;

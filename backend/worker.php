@@ -15,6 +15,14 @@ class TableBahan{
         $stmt = $kon->query("SELECT * FROM bahan ORDER BY id ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function countEachDataCategory($cat){
+        global $kon;
+        $cat = "%$cat%";
+        $stmt = $kon->prepare("SELECT * FROM bahan WHERE  jenis LIKE :cat");
+        $stmt->bindParam(":cat", $cat);
+        $stmt->execute();
+        return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
     function nuke(){
         global $kon;
         $kon->exec("DELETE FROM bahan");
