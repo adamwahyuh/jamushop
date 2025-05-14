@@ -47,27 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     
     <header>
-        <nav>
-            <div class="logo">
-                <img src="asset/img/ginger-tea.png" alt="Logo" height="50px">
-                <h2><?= $namaToko ?></h2>
-            </div>
-            <!-- // Search -->
-            <div class="search-container">
-                <form action="/" method="get" class="search">
-                    <input type="text" name="search" id="search" placeholder="Cari bahan...">
-                    <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-            </div>
-            <!-- Keranjang -->
-            <div class="cart">
-                <a href="pages/keranjang.php"><i class="bi bi-measuring-cup"></i></a>
-                <?php if($totalDataKeranjang !== 0): ?>
-                    <span class="cart-count"><?= $totalDataKeranjang ?></span>
-                    <?php else:?>
-                <?php endif; ?>
-            </div>
-        </nav>
+        <?php include("pages/components/navbar.php"); ?>
     </header>
 
     <!-- pesan berhasil tambah -->
@@ -90,7 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <a href="?search=">Semua <span class="highlight-indicator">(<?= $totalBahan ?>)</span></a>
                     <hr>
                 </div>
+                <div class="admin">
+                    <h2>Administrator</h2>
+                    <a href="pages/admin/">Admin panel</a>
+                    <hr>
+                </div>
             </div>
+            
         </div>
 
     <?php if (!empty($listBahan)): ?>
@@ -124,30 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </main>
 
     <footer>
-        <div class="social">
-            <p>Author : Adam Wahyu Hariyadi</p>
-            <div class="social-links">
-                <ul class="link">
-                    <li><a target="_blank" href="mailto:adamdesign19@gmail.com"><i class="bi bi-google"></i></a></li>
-                    <li><a target="_blank" href="https://instagram.com/adamwahyuh"><i class="bi bi-instagram"></i></a></li>
-                    <li><a target="_blank" href="https://github.com/adamwahyuh"><i class="bi bi-github"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="yapping">
-            <div class="tentang">
-                <h2>Tentang</h2>
-                <p>Website ini dibuat untuk Ujian Tengah Semester (MIDTEST) Pemrograman Web 1 - Dibuat Oleh Adam Wahyu Hariyadi menggunakan PHP dengan database Sqlite - 
-                    <a style="color:purple; font-weight:900;" href="https://utpas.ac.id">UTPAS 23</a></p>
-            </div>
-            <div class="credit">
-                <h2>Links</h2>
-                <ul>
-                    <li><a href="#">Credit</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
-        </div>
+        <?php include("pages/components/footer.php"); ?>
     </footer>
 
     <script src="asset/js/index.js"></script>
