@@ -15,7 +15,7 @@ nav .logo {
     flex-shrink: 0;
 }
 
-nav .logo h2 {
+nav .logo h2 a{
     font-size: 1.5rem;
     color: #3e3e3e;
     margin: 0;
@@ -92,4 +92,7 @@ nav .cart a:hover {
         align-items: stretch;
     }
 
+}
+a{
+    text-decoration: none;
 }

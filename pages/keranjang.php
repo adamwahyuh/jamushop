@@ -59,7 +59,7 @@ $listKeranjang = $keranjang->fetchAllData();
         <nav>
             <div class="logo">
                 <img src="../asset/img/ginger-tea.png" alt="Logo" height="50px">
-                <h2><?= $namaToko ?></h2>
+                <h2><a href="../index.php"><?= $namaToko ?></a></h2>
             </div>
             <!-- // Search -->
             <div class="search-container">
