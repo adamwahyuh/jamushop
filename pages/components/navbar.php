@@ -1,6 +1,10 @@
+<head>
+    <link rel="stylesheet" href="../../asset/css/navbar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
 <nav>
     <div class="logo">
-        <img src="../asset/img/ginger-tea.png" alt="Logo" height="50px">
+        <img src="../../asset/img/ginger-tea.png" alt="Logo" height="50px">
         <h2><?= $namaToko ?></h2>
     </div>
     <!-- // Search -->

@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../../asset/css/footer.css">
+</head>
 <div class="social">
     <p>Author : Adam Wahyu Hariyadi</p>
     <div class="social-links">

@@ -38,9 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $namaToko ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="asset/css/navbar.css">
     <link rel="stylesheet" href="asset/css/index.css">
-    <link rel="stylesheet" href="asset/css/footer.css">
     <link rel="stylesheet" href="asset/css/global.css">
     <link rel="stylesheet" href="asset/css/card.css">
 </head>
