@@ -88,6 +88,7 @@ class TableKeranjang{
                 b.nama,
                 b.harga,
                 b.foto,
+                b.jenis,
                 (k.porsi * b.harga) AS total_harga
             FROM keranjang k
             JOIN bahan b ON k.bahan_id = b.id
