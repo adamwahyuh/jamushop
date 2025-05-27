@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header('Location : ../index.php');
     }
 }
-
+$totalHarga=0;
 $listKeranjang = $keranjang->fetchAllData();
 ?>
 
@@ -118,7 +118,7 @@ $listKeranjang = $keranjang->fetchAllData();
             <?php else: ?>
                 <div class="cart-items"></div>
                     <div class="cart-item">
-                        <h2 class="empty-cart">Cangkir mu kosong..</h2>
+		    <h2 class="empty-cart">Cangkir mu kosong.. Total Harga = <?= $totalHarga; ?></h2>
                     </div>
                 </div>
             <?php endif; ?>

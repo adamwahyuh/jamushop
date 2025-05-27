@@ -12,6 +12,17 @@ CREATE TABLE keranjang(
   porsi INTEGER NOT NULL DEFAULT 1,
   FOREIGN KEY (bahan_id) REFERENCES bahan(id)
 );
+CREATE TABLE racikan(
+ id INTEGER PRIMARY KEY,
+ nama VARCHAR(255) NOT NULL
+);
+CREATE TABLE detail_racikan(
+ id INTEGER PRIMARY KEY NOT NULL,
+ bahan_id INTEGER NOT NULL,
+ racikan_id INTEGER NOT NULL, 
+ FOREIGN KEY (bahan_id) REFERENCES bahan(id),
+ FOREIGN KEY (racikan_id) REFERENCES racikan(id)
+); 
 
 INSERT INTO bahan(nama, jenis, deskripsi, harga, foto) VALUES
 ('Kunyit','Bahan utama','Antioksidan, antiradang, meningkatkan sistem imun, meredakan nyeri haid',1500,'asset/img/kunyit.png'),

@@ -150,5 +150,19 @@ class TableKeranjang{
 
 }
 
+class TableRacikan{
+    function create($nama){
+        global $kon;
+        $sql = "INSERT INTO racikan(nama) VALUES ('$nama')";
+        $kon->exec($sql);
+    }
+    function destroy($id){
+        global $kon;
+        $sql = "DELETE FROM keranjang WHERE id = " . $id;
+        $kon->exec($sql);
+    }
+}
+
 $bahan = new TableBahan();
 $keranjang = new TableKeranjang();
+$racikan = new TableRacikan();
