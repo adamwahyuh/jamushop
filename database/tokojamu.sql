@@ -12,6 +12,17 @@ CREATE TABLE keranjang(
   porsi INTEGER NOT NULL DEFAULT 1,
   FOREIGN KEY (bahan_id) REFERENCES bahan(id)
 );
+CREATE TABLE racikan(
+ id INTEGER PRIMARY KEY,
+ nama VARCHAR(255) NOT NULL
+);
+CREATE TABLE detail_racikan(
+ id INTEGER PRIMARY KEY NOT NULL,
+ bahan_id INTEGER NOT NULL,
+ racikan_id INTEGER NOT NULL, 
+ FOREIGN KEY (bahan_id) REFERENCES bahan(id),
+ FOREIGN KEY (racikan_id) REFERENCES racikan(id)
+); 
 
 INSERT INTO bahan(nama, jenis, deskripsi, harga, foto) VALUES
 ('Kunyit','Bahan utama','Antioksidan, antiradang, meningkatkan sistem imun, meredakan nyeri haid',1500,'asset/img/kunyit.png'),
@@ -37,3 +48,18 @@ INSERT INTO bahan(nama, jenis, deskripsi, harga, foto) VALUES
 ('Soda','Bahan tambahan','Memberi sensasi segar dan rasa modern pada jamu',1000,'asset/img/soda.png'),
 ('Mint','Bahan tambahan','Memberi sensasi segar, antibakteri',800,'asset/img/mint.png'),
 ('Stevia','Pemanis','Menambah rasa manis alami, sumber energi',2000,'asset/img/stevia.png');
+
+INSERT INTO racikan(nama) VALUES
+('Jamu Kunyit Asam'),
+('Jamu Beras Kencur');
+
+INSERT INTO detail_racikan(bahan_id, racikan_id) VALUES
+(1, 1), 
+(9, 1),  
+(16, 1); 
+
+INSERT INTO detail_racikan(bahan_id, racikan_id) VALUES
+(4, 2), 
+(16, 2),  
+(12, 2); 
+

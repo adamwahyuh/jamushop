@@ -1,9 +1,6 @@
 <?php 
-
-// aku mau lambo
 try{
-    $kon = new \PDO('sqlite:'.__DIR__.'/../database/database.db');
-    // echo "Duck is Ducking in the River";
+	$kon = new \PDO('sqlite:'.__DIR__.'/../database/database.db');
 }catch(\PDOException $e){
     echo $e->getMessage();
 }
