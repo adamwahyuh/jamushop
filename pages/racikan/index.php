@@ -1,5 +1,15 @@
 <?php
 include('../../backend/koneksi.php');
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $namaRacikan = $_POST['nama_racikan'] ?? false;
+    if ($namaRacikan != false) {
+        $racikan->create($namaRacikan);
+        $lastId = $kon->lastInsertId();
+        header("Location: racikan/create-detail.php?id=" . $lastId);
+        exit();
+    }
+}
+
 $listRacikan = $racikan->fetchAll();
 ?>
 
@@ -22,7 +32,7 @@ $listRacikan = $racikan->fetchAll();
     <!-- Form Buat Racikan -->
     <form class="form" method="POST">
         <div class="form-group input-group">
-            <input type="text" name="nama" class="input-text" placeholder="Nama racikanmu" required>
+            <input type="text" name="nama_racikan" class="input-text" placeholder="Nama racikanmu" required>
             <button type="submit" class="btn-secondary">Make</button>
         </div>
     </form>

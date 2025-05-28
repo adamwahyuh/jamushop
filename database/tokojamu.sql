@@ -51,15 +51,7 @@ INSERT INTO bahan(nama, jenis, deskripsi, harga, foto) VALUES
 
 INSERT INTO racikan(nama) VALUES
 ('Jamu Kunyit Asam'),
-('Jamu Beras Kencur'),
-('Jamu Temulawak'),
-('Jamu Jahe Hangat'),
-('Jamu Sirih Sehat'),
-('Jamu Tradisional Campur'),
-('Jamu Soda Segar'),
-('Jamu Delima Mint'),
-('Jamu Lemon Stevia'),
-('Jamu Mengkudu Plus');
+('Jamu Beras Kencur');
 
 INSERT INTO detail_racikan(bahan_id, racikan_id) VALUES
 (1, 1), 
