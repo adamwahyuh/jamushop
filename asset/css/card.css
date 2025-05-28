@@ -7,7 +7,7 @@
 .card {
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
 .card-price {
   font-size: 15px;
   font-weight: bold;
-  color: #F4631E;
+  color: #f4631e;
   margin: 0;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .card-button:hover {
-  background-color: #388e3c; 
+  background-color: #388e3c;
 }
 
 .keranjang-form {

@@ -10,6 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+if($_SERVER['REQUEST_METHOD']=='GET'){
+    $idRacikan= $_GET['id'] ?? false;
+    if ($idRacikan != false){
+        $racikan->destroy($idRacikan);
+        header("Location: /pages/racikan");
+        exit;
+    }
+}
+
 $listRacikan = $racikan->fetchAll();
 ?>
 
@@ -61,7 +70,7 @@ $listRacikan = $racikan->fetchAll();
                         <a href="edit_racikan.php?id=<?= $racikan['id'] ?>" class="btn-warning">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
-                        <a href="delete_racikan.php?id=<?= $racikan['id'] ?>" class="btn-danger" onclick="return confirm('Yakin hapus?')">
+                        <a href="?id=<?= $racikan['id'] ?>" class="btn-danger" onclick="confirmAlert('Delete?');">
                             <i class="bi bi-trash-fill"></i>
                         </a>
                     </div>
@@ -71,6 +80,6 @@ $listRacikan = $racikan->fetchAll();
     <?php endif; ?>
 </main>
 
-
+<script src="../../asset/ts/index.js"></script>
 </body>
 </html>
