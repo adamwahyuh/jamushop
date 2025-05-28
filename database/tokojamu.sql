@@ -20,6 +20,7 @@ CREATE TABLE detail_racikan(
  id INTEGER PRIMARY KEY NOT NULL,
  bahan_id INTEGER NOT NULL,
  racikan_id INTEGER NOT NULL, 
+ porsi INTEGER NOT NULL DEFAULT 1,
  FOREIGN KEY (bahan_id) REFERENCES bahan(id),
  FOREIGN KEY (racikan_id) REFERENCES racikan(id)
 ); 

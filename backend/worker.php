@@ -174,8 +174,6 @@ class TableRacikan {
         global $kon;
         $stmt = $kon->query("SELECT * FROM racikan ORDER BY id ASC");
         $racikanList = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Tambahkan bahan untuk setiap racikan
         foreach ($racikanList as &$racikan) {
             $stmtDetail = $kon->prepare("
                 SELECT b.nama, b.foto 
@@ -201,26 +199,25 @@ class TableRacikan {
 }
 
 
-class TableDetailRacikan {
-    function create($racikan_id, $bahan_id){
+class TableDetailRacikan {    
+    function create($racikan_id, $bahan_id, $porsi = 1){
         global $kon;
-        $stmt = $kon->prepare("INSERT INTO detail_racikan (bahan_id, racikan_id) VALUES (:bahan_id, :racikan_id)");
+        $stmt = $kon->prepare("INSERT INTO detail_racikan (bahan_id, racikan_id, porsi) VALUES (:bahan_id, :racikan_id, :porsi)");
         $stmt->bindParam(':bahan_id', $bahan_id, PDO::PARAM_INT);
         $stmt->bindParam(':racikan_id', $racikan_id, PDO::PARAM_INT);
+        $stmt->bindParam(':porsi', $porsi, PDO::PARAM_INT);
         $stmt->execute();
     }
-
     function destroy($id){
         global $kon;
         $stmt = $kon->prepare("DELETE FROM detail_racikan WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
-
     function getByRacikanId($racikan_id){
         global $kon;
         $stmt = $kon->prepare("
-            SELECT dr.id, b.nama, b.harga, b.jenis, b.foto 
+            SELECT dr.id, b.nama, b.harga, b.jenis, b.foto, dr.porsi
             FROM detail_racikan dr
             JOIN bahan b ON dr.bahan_id = b.id
             WHERE dr.racikan_id = :racikan_id
@@ -229,12 +226,22 @@ class TableDetailRacikan {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     function clearByRacikanId($racikan_id){
         global $kon;
         $stmt = $kon->prepare("DELETE FROM detail_racikan WHERE racikan_id = :racikan_id");
         $stmt->bindParam(':racikan_id', $racikan_id, PDO::PARAM_INT);
         $stmt->execute();
+    }
+    function updatePorsi($id, $porsi){
+        global $kon;
+        if (empty($id) || empty($porsi)) {
+            header('Location: /');
+            exit();
+        }
+        $stmt = $kon->prepare("UPDATE detail_racikan SET porsi = :porsi WHERE id = :id");
+        $stmt->bindParam(':porsi', $porsi, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }
 

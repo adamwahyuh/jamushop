@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($namaRacikan != false) {
         $racikan->create($namaRacikan);
         $lastId = $kon->lastInsertId();
-        header("Location: racikan/create-detail.php?id=" . $lastId);
+        header("Location: /pages/racikan/create-detail.php?id=" . $lastId);
         exit();
     }
 }
@@ -14,8 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     $idRacikan= $_GET['id'] ?? false;
     if ($idRacikan != false){
         $racikan->destroy($idRacikan);
-        header("Location: /pages/racikan");
-        exit;
+        header("Location: /pages/racikan/");
     }
 }
 
@@ -67,7 +66,7 @@ $listRacikan = $racikan->fetchAll();
                         </div>
                     </div>
                     <div class="racikan-actions">
-                        <a href="edit_racikan.php?id=<?= $racikan['id'] ?>" class="btn-warning">
+                        <a href="?id=<?= $racikan['id'] ?>" class="btn-warning">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a href="?id=<?= $racikan['id'] ?>" class="btn-danger" onclick="confirmAlert('Delete?');">
