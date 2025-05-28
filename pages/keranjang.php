@@ -29,16 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($id != false) {
         $keranjang->destroy( $id );
         header('Location : keranjang.php');
-        exit;
     }
-    header('Location : keranjang.php');
     
     if($nuke != false) {
         $keranjang->nuke();
         header('Location : ../index.php');
     }
 }
-
+$totalHarga= 0;
 $listKeranjang = $keranjang->fetchAllData();
 ?>
 
@@ -118,7 +116,7 @@ $listKeranjang = $keranjang->fetchAllData();
             <?php else: ?>
                 <div class="cart-items"></div>
                     <div class="cart-item">
-                        <h2 class="empty-cart">Cangkir mu kosong..</h2>
+                        <h2 class="empty-cart">Cangkir mu kosong.. Total Harga : <?= $totalHarga ?></h2>
                     </div>
                 </div>
             <?php endif; ?>
@@ -132,7 +130,7 @@ $listKeranjang = $keranjang->fetchAllData();
                     <span>Total</span>
                     <span>Rp<?= number_format($totalHarga) ?></span>
                 </div>
-                <a href="?nuke=doit" class="checkout-btn">Checkout</a>
+                <a href="?nuke=doit" class="checkout-btn"  onclick="confirmAlert('Pay?')">Checkout</a>
             </div>
             <?php else: ?>
                 <?php endif; ?>
@@ -141,5 +139,6 @@ $listKeranjang = $keranjang->fetchAllData();
 
     <footer>
     </footer>
+    <script src="../asset/ts/index.js"></script>
 </body>
 </html>

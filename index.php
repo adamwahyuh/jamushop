@@ -111,6 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php include("pages/components/footer.php"); ?>
     </footer>
 
-    <script src="asset/js/index.js"></script>
+    <script src="asset/ts/index.js"></script>
 </body>
 </html>
