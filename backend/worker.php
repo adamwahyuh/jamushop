@@ -150,19 +150,96 @@ class TableKeranjang{
 
 }
 
-class TableRacikan{
+class TableRacikan {
     function create($nama){
         global $kon;
         $sql = "INSERT INTO racikan(nama) VALUES ('$nama')";
         $kon->exec($sql);
     }
+
     function destroy($id){
         global $kon;
-        $sql = "DELETE FROM keranjang WHERE id = " . $id;
-        $kon->exec($sql);
+        // Hapus detailnya dulu 
+        $stmt = $kon->prepare("DELETE FROM detail_racikan WHERE racikan_id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Hapus racikan
+        $stmt2 = $kon->prepare("DELETE FROM racikan WHERE id = :id");
+        $stmt2->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt2->execute();
+    }
+
+    function fetchAll(){
+        global $kon;
+        $stmt = $kon->query("SELECT * FROM racikan ORDER BY id ASC");
+        $racikanList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Tambahkan bahan untuk setiap racikan
+        foreach ($racikanList as &$racikan) {
+            $stmtDetail = $kon->prepare("
+                SELECT b.nama, b.foto 
+                FROM detail_racikan dr
+                JOIN bahan b ON dr.bahan_id = b.id
+                WHERE dr.racikan_id = :racikan_id
+            ");
+            $stmtDetail->bindParam(':racikan_id', $racikan['id'], PDO::PARAM_INT);
+            $stmtDetail->execute();
+            $racikan['bahan'] = $stmtDetail->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $racikanList;
+    }
+
+    function getById($id){
+        global $kon;
+        $stmt = $kon->prepare("SELECT * FROM racikan WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+
+class TableDetailRacikan {
+    function create($racikan_id, $bahan_id){
+        global $kon;
+        $stmt = $kon->prepare("INSERT INTO detail_racikan (bahan_id, racikan_id) VALUES (:bahan_id, :racikan_id)");
+        $stmt->bindParam(':bahan_id', $bahan_id, PDO::PARAM_INT);
+        $stmt->bindParam(':racikan_id', $racikan_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    function destroy($id){
+        global $kon;
+        $stmt = $kon->prepare("DELETE FROM detail_racikan WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    function getByRacikanId($racikan_id){
+        global $kon;
+        $stmt = $kon->prepare("
+            SELECT dr.id, b.nama, b.harga, b.jenis, b.foto 
+            FROM detail_racikan dr
+            JOIN bahan b ON dr.bahan_id = b.id
+            WHERE dr.racikan_id = :racikan_id
+        ");
+        $stmt->bindParam(':racikan_id', $racikan_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function clearByRacikanId($racikan_id){
+        global $kon;
+        $stmt = $kon->prepare("DELETE FROM detail_racikan WHERE racikan_id = :racikan_id");
+        $stmt->bindParam(':racikan_id', $racikan_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+}
+
 
 $bahan = new TableBahan();
 $keranjang = new TableKeranjang();
 $racikan = new TableRacikan();
+$detailRacikan = new TableDetailRacikan();

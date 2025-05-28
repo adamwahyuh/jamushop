@@ -48,3 +48,26 @@ INSERT INTO bahan(nama, jenis, deskripsi, harga, foto) VALUES
 ('Soda','Bahan tambahan','Memberi sensasi segar dan rasa modern pada jamu',1000,'asset/img/soda.png'),
 ('Mint','Bahan tambahan','Memberi sensasi segar, antibakteri',800,'asset/img/mint.png'),
 ('Stevia','Pemanis','Menambah rasa manis alami, sumber energi',2000,'asset/img/stevia.png');
+
+INSERT INTO racikan(nama) VALUES
+('Jamu Kunyit Asam'),
+('Jamu Beras Kencur'),
+('Jamu Temulawak'),
+('Jamu Jahe Hangat'),
+('Jamu Sirih Sehat'),
+('Jamu Tradisional Campur'),
+('Jamu Soda Segar'),
+('Jamu Delima Mint'),
+('Jamu Lemon Stevia'),
+('Jamu Mengkudu Plus');
+
+INSERT INTO detail_racikan(bahan_id, racikan_id) VALUES
+(1, 1), 
+(9, 1),  
+(16, 1); 
+
+INSERT INTO detail_racikan(bahan_id, racikan_id) VALUES
+(4, 2), 
+(16, 2),  
+(12, 2); 
+
